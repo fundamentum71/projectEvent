@@ -1,0 +1,54 @@
+// Файл обнуляющих стилей
+@import '_nullstyle';
+
+body {
+	background-color: rgb(140, 231, 208);
+}
+
+.content {
+	width: 900px;
+	margin: 0 auto;
+
+	//border: solid black 1px;
+	font-size: 25px;
+}
+.clockField {
+	height: 100px;
+	width: 350px;
+
+	margin: 0 auto;
+}
+.mainClock {
+	padding: 30px 0 0 0;
+	text-align: center;
+	font-size: 50px;
+}
+.outputField {
+	padding: 15px 20px 0 30px;
+	height: 500px;
+	border: solid black 1px;
+	color: gray;
+	background-color: white;
+	border-radius: 20px;
+	overflow: auto;
+}
+
+//.outputTitle {
+//	color: green;
+//}
+
+.outputText {
+	padding: 15px 0 0 0;
+}
+.buttonField {
+	height: 75px;
+}
+.mainButton {
+	display: block;
+	width: 300px;
+	height: 75px;
+	margin: 20px auto;
+	background-color: rgb(27, 221, 255);
+	border-radius: 20px;
+	font-size: 25px;
+}
