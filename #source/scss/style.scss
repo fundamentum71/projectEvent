@@ -2,8 +2,8 @@
 @import '_nullstyle';
 
 body {
-	background-color: rgb(140, 231, 208);
-	background: url('/slivochnoe-maslo.jpg') center (center / cover) no-repeat;
+	background-color: rgb(113, 116, 115);
+	//background: url('/slivochnoe-maslo.jpg') center (center / cover) no-repeat;
 }
 
 .content {
@@ -36,33 +36,17 @@ body {
 	overflow: auto;
 }
 
-//.outputTitle {
-//	color: green;
-//}
-
 .outputText {
 	padding: 15px 0 0 0;
 }
 .buttonField {
 	height: 75px;
 }
-//.mainButton {
-//	display: block;
-//	width: 300px;
-//	height: 75px;
-//	margin: 20px auto;
-
-//	border-radius: 20px;
-//	font-size: 25px;
-//}
 
 .add {
-	.promo__interactive-title {
-		margin-bottom: 25px;
-	}
 	span {
 		display: block;
-		margin: 10px 0;
+		margin: 10px 50px;
 		font-weight: bold;
 		font-size: 16px;
 		line-height: 16px;
@@ -70,7 +54,7 @@ body {
 	}
 	.yes {
 		display: inline;
-		margin-left: 10px;
+		margin-left: 6px;
 	}
 	input[type='text'] {
 		width: 270px;
@@ -95,14 +79,14 @@ body {
 		height: 45px;
 		background: #ffd500;
 		font-weight: bold;
-		font-size: 14px;
+		font-size: 18px;
 		line-height: 14px;
 		color: #ffffff;
 		border: none;
 		outline: none;
 		cursor: pointer;
 		&:active {
-			transform: scale(0.95);
+			transform: scale(0.9);
 		}
 	}
 }
@@ -115,27 +99,33 @@ body {
 	line-height: 18px;
 	color: #000000;
 	margin-bottom: 15px;
-	padding-right: 40px;
-	//text-transform: uppercase;
-	//span {
-	//	display: block;
+	padding-right: 100px;
+	text-transform: uppercase;
+
+	//&:before {
+	//	content: '';
 	//	position: absolute;
-	//	left: -30px;
-	//	top: 50%;
-	//	transform: translateY(-50%);
-	//	width: 20px;
-	//	height: 20px;
-	//	background: url('../icons/Star.svg') center (center / cover) no-repeat;
+	//	bottom: -5px;
+	//	display: block;
+	//	width: calc(100% - 100px);
+	//	height: 2px;
+	//	background-color: #ffd500;
 	//}
-	&:before {
-		content: '';
-		position: absolute;
-		bottom: -5px;
-		display: block;
-		width: calc(100% - 40px);
-		height: 2px;
-		background-color: #ffd500;
+	&:hover {
+		.getNew {
+			content: '';
+			display: block;
+			position: absolute;
+			right: 30px;
+			top: 50%;
+			transform: translateY(-50%);
+			width: 20px;
+			height: 20px;
+			background: url('/icon/pngwing.png') center (center / cover) no-repeat;
+			cursor: pointer;
+		}
 	}
+
 	&:hover {
 		.delete {
 			content: '';

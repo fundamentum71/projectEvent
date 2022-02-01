@@ -8,44 +8,42 @@ document.addEventListener('DOMContentLoaded', () => {
 		slctr: [],
 	};
 
-	console.log(eventDb);
-
 	addForm.addEventListener('submit', (e) => {
 		e.preventDefault();
 
 		let newSlctr = addInput.value;
 		if (newSlctr) {
 			if (newSlctr.length > 21) {
-				newSlctr = `${Slctr.substring(0, 22)}...`;
+				newSlctr = `${slctr.substring(0, 22)}...`;
 			}
 
 			const favorite = checkBox.checked;
-			//if (favorite) {
-			//	eventDb.slctr.style.backgroundColor = 'red';
-			//}
+
+			if (favorite) {
+				eventDb.importan = true;
+			}
 
 			eventDb.slctr.push(newSlctr);
-
+			eventDb.slctr[newSlctr];
 			createEventList(eventDb.slctr, eventList);
 		}
 		e.target.reset();
 		console.log(eventDb.slctr);
 	});
 
-	function checkedOn() {
-		const favorite = checkBox.checked;
-		if (favorite) {
-			eventDb.slctr.style.backgroundColor = 'red';
-		}
-	}
+	//function checkedOn() {
+	//	const favorite = checkBox.checked;
+	//	if (favorite) {
+	//		eventDb.slctr.style.backgroundColor = 'red';
+	//	}
+	//}
 
 	function createEventList(elem, parent) {
 		parent.innerHTML = '';
-
 		elem.forEach((evente, i) => {
 			parent.innerHTML += ` <li class="output__interactive-item"> ${
 				i + 1
-			} - ${evente}  <div class="delete"></div></li>`;
+			} - ${evente} <div class="getNew"></div> <div class="delete"></div> </li> `;
 		});
 		//Удаление на кнопку
 		document.querySelectorAll('.delete').forEach((btn, i) => {
@@ -71,6 +69,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	//	return nowTime;
 	//}
-	checkedOn();
+	//checkedOn();
 	createEventList(eventDb.slctr, eventList);
 });
