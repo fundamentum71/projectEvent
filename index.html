@@ -15,15 +15,37 @@
 				</div>
 			</div>
 			<div class="outputField">
-				<div class="outputText outputTitle">Произошедшие события:</div>
+				<!--<div class="outputText outputTitle">Произошедшие события:</div>-->
+				<ul class="output__interactive-list">
+					<li class="promo__interactive-item">
+						ПРИМЕР ТЕКСТА дела
+						<div class="delete"></div>
+					</li>
+				</ul>
+				<div class="greyblock">
+					<form class="add">
+						<!--<div class="promo__interactive-title">
+							ДОБАВИТЬ НОВОЕ ДЕЛО
+						</div>-->
+						<span>Сделайте заметку</span>
+						<input
+							class="adding__input"
+							type="text"
+							placeholder="Название заметки..."
+						/>
+						<span>Сделать ее важной?</span>
+						<input type="checkbox" />
+						<span class="yes">Да!</span>
+						<button>Записать</button>
+					</form>
+				</div>
 			</div>
-			<div class="buttonField">
-				<button class="mainButton" type="button" onClick="onClick()">
-					Добавить событие
-				</button>
-			</div>
+			<!--<div class="buttonField">
+				<button class="mainButton" type="btn">Добавить событие</button>
+			</div>-->
 		</div>
 		<script src="./Mclock.js"></script>
-		<script src="./Mclick.js"></script>
+		<script src="/script.js"></script>
+		<!--<script src="./Mclick.js"></script>-->
 	</body>
 </html>
