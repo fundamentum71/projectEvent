@@ -4,71 +4,63 @@ document.addEventListener('DOMContentLoaded', () => {
 		addForm = document.querySelector('form.add'),
 		checkBox = addForm.querySelector('[type="checkbox"]');
 
-	const eventDb = {
-		slctr: [],
-	};
+	let eventDb = [];
 
-	addForm.addEventListener('submit', (e) => {
-		e.preventDefault();
-
-		let newSlctr = addInput.value;
-		if (newSlctr) {
-			if (newSlctr.length > 21) {
-				newSlctr = `${slctr.substring(0, 22)}...`;
-			}
-
-			const favorite = checkBox.checked;
-
-			if (favorite) {
-				eventDb.importan = true;
-			}
-
-			eventDb.slctr.push(newSlctr);
-			eventDb.slctr[newSlctr];
-			createEventList(eventDb.slctr, eventList);
-		}
-		e.target.reset();
-		console.log(eventDb.slctr);
-	});
-
-	//function checkedOn() {
-	//	const favorite = checkBox.checked;
-	//	if (favorite) {
-	//		eventDb.slctr.style.backgroundColor = 'red';
-	//	}
+	//if (localStorage.getItem('todo')) {
+	//	eventDb = JSON.parse(localStorage.getItem('todo'));
+	//	displayMessage();
 	//}
 
-	function createEventList(elem, parent) {
-		parent.innerHTML = '';
-		elem.forEach((evente, i) => {
-			parent.innerHTML += ` <li class="output__interactive-item"> ${
-				i + 1
-			} - ${evente} <div class="getNew"></div> <div class="delete"></div> </li> `;
-		});
-		//Удаление на кнопку
-		document.querySelectorAll('.delete').forEach((btn, i) => {
-			btn.addEventListener('click', () => {
-				btn.parentElement.remove();
-				eventDb.slctr.splice(i, 1);
-				createEventList(eventDb.slctr, eventList);
-			});
+	//создаст элемент отправкой формы
+	addForm.addEventListener('submit', (e) => {
+		e.preventDefault();
+		if (!addInput.value) return;
+		let newSlctr = {
+			todo: addInput.value,
+			checked: false,
+			importan: false,
+		};
+
+		if (checkBox.checked) {
+			newSlctr.importan = true;
+		}
+		eventDb.push(newSlctr);
+
+		displayMessage();
+
+		localStorage.setItem('todo', JSON.stringify(eventDb));
+		console.log(eventDb);
+
+		e.target.reset();
+	});
+
+	function displayMessage() {
+		let displayMessage = '';
+
+		eventDb.forEach(function (item, i) {
+			displayMessage += `
+			<li class="output__interactive-item">
+			
+			<label 
+			for= 'item_${i}' 
+			class= " ${item.importan ? 'important' : ''}" >
+			Запись # ${i + 1} - ${item.todo}</label>
+
+			<div class="delete"></div> 
+			<div class="getNew"></div>
+			</li>
+			`;
+			eventList.innerHTML = displayMessage;
 		});
 	}
 
-	//function nowDate() {
-	//	const date = new Date();
-	//	let hours = date.getHours();
-	//	let minutes = date.getMinutes();
-	//	let seconds = date.getSeconds();
-
-	//	if (hours < 10) hours = '0' + hours;
-	//	if (minutes < 10) minutes = `0${minutes}`;
-	//	if (seconds < 10) seconds = `0${seconds}`;
-
-	//	let nowTime = hours + ':' + minutes + ':' + seconds;
-
-	//	return nowTime;
+	//function deleteBtn() {
+	//	document.querySelectorAll('.delete').forEach((btn, i) => {
+	//		btn.addEventListener('click', () => {
+	//			btn.parentElement.remove();
+	//			eventDb.splice(i, 1);
+	//		});
+	//	});
 	//}
-	//checkedOn();
-	createEventList(eventDb.slctr, eventList);
+	//deleteBtn();
 });

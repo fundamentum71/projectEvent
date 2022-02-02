@@ -34,6 +34,14 @@ body {
 	background-color: white;
 	border-radius: 20px;
 	overflow: auto;
+	font-weight: 400;
+	color: black;
+	font-size: 20px;
+}
+
+.important {
+	font-weight: bold;
+	color: brown;
 }
 
 .outputText {
@@ -91,26 +99,30 @@ body {
 	}
 }
 
+.output__interactive-list {
+	overflow: auto;
+}
+
 .output__interactive-item {
 	display: block;
 	position: relative;
 	font-weight: 300;
-	font-size: 20px;
+	font-size: 24px;
 	line-height: 18px;
 	color: #000000;
 	margin-bottom: 15px;
 	padding-right: 100px;
-	text-transform: uppercase;
+	//text-transform: uppercase;
 
-	//&:before {
-	//	content: '';
-	//	position: absolute;
-	//	bottom: -5px;
-	//	display: block;
-	//	width: calc(100% - 100px);
-	//	height: 2px;
-	//	background-color: #ffd500;
-	//}
+	&:before {
+		content: '';
+		position: absolute;
+		bottom: -5px;
+		display: block;
+		width: calc(100% - 100px);
+		height: 2px;
+		background-color: #ffd500;
+	}
 	&:hover {
 		.getNew {
 			content: '';
@@ -119,8 +131,8 @@ body {
 			right: 30px;
 			top: 50%;
 			transform: translateY(-50%);
-			width: 20px;
-			height: 20px;
+			width: 17px;
+			height: 17px;
 			background: url('/icon/pngwing.png') center (center / cover) no-repeat;
 			cursor: pointer;
 		}
@@ -134,8 +146,8 @@ body {
 			right: 0px;
 			top: 50%;
 			transform: translateY(-50%);
-			width: 20px;
-			height: 20px;
+			width: 17px;
+			height: 17px;
 			background: url('/icon/trash.png') center (center / cover) no-repeat;
 			cursor: pointer;
 		}
