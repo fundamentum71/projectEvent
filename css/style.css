@@ -256,7 +256,7 @@ body {
   content: '';
   display: block;
   position: absolute;
-  right: 0px;
+  right: 60px;
   top: 50%;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);

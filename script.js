@@ -40,27 +40,50 @@ document.addEventListener('DOMContentLoaded', () => {
 		eventDb.forEach(function (item, i) {
 			displayMessage += `
 			<li class="output__interactive-item">
-			
+			<input class = "checked" type = "checkbox" id='item_${i}'  ${
+				item.checked ? 'checked' : ''
+			}"  />
+
 			<label 
 			for= 'item_${i}' 
 			class= " ${item.importan ? 'important' : ''}" >
 			Запись # ${i + 1} - ${item.todo}</label>
 
 			<div class="delete"></div> 
-			<div class="getNew"></div>
+			
 			</li>
 			`;
 			eventList.innerHTML = displayMessage;
 		});
-	}
 
-	//function deleteBtn() {
-	//	document.querySelectorAll('.delete').forEach((btn, i) => {
-	//		btn.addEventListener('click', () => {
-	//			btn.parentElement.remove();
-	//			eventDb.splice(i, 1);
-	//		});
-	//	});
-	//}
-	//deleteBtn();
+		document.querySelectorAll('.delete').forEach((btn, i) => {
+			btn.addEventListener('click', () => {
+				btn.parentElement.remove();
+				eventDb.splice(i, 1);
+				displayMessage();
+			});
+		});
+
+		//eventList.addEventListener('change', function (event) {
+		//	let idInput = event.target.getAttribute('id');
+		//	let valueLabel = eventList.querySelector(
+		//		'[for=' + idInput + ']'
+		//	).innerHTML;
+
+		//	eventDb.forEach(function (item) {
+		//		if (item.todo === valueLabel) {
+		//			item.checked = !item.checked;
+		//			localStorage.setItem('todo', JSON.stringify(eventDb));
+		//		}
+		//	});
+		//});
+
+		//document.querySelectorAll('.getNew').forEach((btn, i) => {
+		//	btn.addEventListener('click', () => {
+		//		btn.eventList.style.text-decoration = "line-through";
+		//		eventDb.slice(i, 1);
+		//		displayMessage();
+		//	});
+		//});
+	}
 });
