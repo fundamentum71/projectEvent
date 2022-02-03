@@ -90,7 +90,7 @@ h6 {
 
 /*--------------------*/
 body {
-  background-color: #717473;
+  background: url("/greyfon.jpg") center center/cover no-repeat;
 }
 
 .content {
@@ -109,6 +109,7 @@ body {
   padding: 30px 0 0 0;
   text-align: center;
   font-size: 50px;
+  color: #ffffff;
 }
 
 .outputField {
@@ -133,6 +134,13 @@ body {
 .important {
   font-weight: bold;
   color: brown;
+}
+
+.checkedYES {
+  color: gray;
+  text-decoration: line-through;
+  font-size: 23px;
+  font-style: italic;
 }
 
 .outputText {
@@ -218,6 +226,7 @@ body {
 }
 
 .output__interactive-item {
+  max-width: 500px;
   display: block;
   position: relative;
   font-weight: 300;
@@ -226,16 +235,6 @@ body {
   color: #000000;
   margin-bottom: 15px;
   padding-right: 100px;
-}
-
-.output__interactive-item:before {
-  content: '';
-  position: absolute;
-  bottom: -5px;
-  display: block;
-  width: calc(100% - 100px);
-  height: 2px;
-  background-color: #ffd500;
 }
 
 .output__interactive-item:hover .getNew {

@@ -6,15 +6,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	let eventDb = [];
 
-	//if (localStorage.getItem('todo')) {
-	//	eventDb = JSON.parse(localStorage.getItem('todo'));
-	//	displayMessage();
-	//}
+	if (localStorage.getItem('todo')) {
+		eventDb = JSON.parse(localStorage.getItem('todo'));
+		displayMessage();
+	}
 
 	//создаст элемент отправкой формы
 	addForm.addEventListener('submit', (e) => {
 		e.preventDefault();
 		if (!addInput.value) return;
+		//if (addInput.value > 20) {
+		//	addInput.value = `${addInput.value.substring(0, 22)}...`;
+		//}
 		let newSlctr = {
 			todo: addInput.value,
 			checked: false,
@@ -36,54 +39,67 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	function displayMessage() {
 		let displayMessage = '';
-
+		//if (newSlctr.todo.lingth > 24) {addForm = }
+		if (eventDb.lingth === 0) todo.innerHTML = '';
 		eventDb.forEach(function (item, i) {
 			displayMessage += `
 			<li class="output__interactive-item">
-			<input class = "checked" type = "checkbox" id='item_${i}'  ${
+			<input class = "${
+				item.checked ? 'checkedYES' : ''
+			}" type = "checkbox" id='item_${i}' ${
 				item.checked ? 'checked' : ''
-			}"  />
+			}  />
 
 			<label 
 			for= 'item_${i}' 
-			class= " ${item.importan ? 'important' : ''}" >
-			Запись # ${i + 1} - ${item.todo}</label>
+			class= " ${item.importan ? 'important' : ''} ${
+				item.checked ? 'checkedYES' : ''
+			}" >${item.todo}</label>
 
 			<div class="delete"></div> 
 			
 			</li>
 			`;
 			eventList.innerHTML = displayMessage;
+			deleteElement();
+			localStorage.setItem('todo', JSON.stringify(eventDb));
 		});
+	}
 
+	function deleteElement() {
 		document.querySelectorAll('.delete').forEach((btn, i) => {
 			btn.addEventListener('click', () => {
 				btn.parentElement.remove();
 				eventDb.splice(i, 1);
 				displayMessage();
+				console.log(eventDb);
 			});
 		});
-
-		//eventList.addEventListener('change', function (event) {
-		//	let idInput = event.target.getAttribute('id');
-		//	let valueLabel = eventList.querySelector(
-		//		'[for=' + idInput + ']'
-		//	).innerHTML;
-
-		//	eventDb.forEach(function (item) {
-		//		if (item.todo === valueLabel) {
-		//			item.checked = !item.checked;
-		//			localStorage.setItem('todo', JSON.stringify(eventDb));
-		//		}
-		//	});
-		//});
-
-		//document.querySelectorAll('.getNew').forEach((btn, i) => {
-		//	btn.addEventListener('click', () => {
-		//		btn.eventList.style.text-decoration = "line-through";
-		//		eventDb.slice(i, 1);
-		//		displayMessage();
-		//	});
-		//});
 	}
+
+	eventList.addEventListener('change', function (event) {
+		let idInput = event.target.getAttribute('id');
+		let forLabel = eventList.querySelector('[for=' + idInput + ']');
+		let valueLabel = forLabel.innerHTML;
+		//console.log('forLabel: ', valueLabel);
+
+		eventDb.forEach(function (item) {
+			if (item.todo === valueLabel) {
+				item.checked = !item.checked;
+				displayMessage();
+				localStorage.setItem('todo', JSON.stringify(eventDb));
+			}
+		});
+	});
+
+	eventList.addEventListener('contextmenu', function (e) {
+		e.preventDefault();
+		eventDb.forEach(function (item) {
+			if (item.todo === e.target.innerHTML) {
+				item.importan = !item.importan;
+				displayMessage();
+				localStorage.setItem('todo', JSON.stringify(eventDb));
+			}
+		});
+	});
 });
