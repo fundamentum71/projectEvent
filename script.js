@@ -4,71 +4,102 @@ document.addEventListener('DOMContentLoaded', () => {
 		addForm = document.querySelector('form.add'),
 		checkBox = addForm.querySelector('[type="checkbox"]');
 
-	const eventDb = {
-		slctr: [],
-	};
+	let eventDb = [];
 
+	if (localStorage.getItem('todo')) {
+		eventDb = JSON.parse(localStorage.getItem('todo'));
+		displayMessage();
+	}
+
+	//создаст элемент отправкой формы
 	addForm.addEventListener('submit', (e) => {
 		e.preventDefault();
+		if (!addInput.value) return;
+		//if (addInput.value > 20) {
+		//	addInput.value = `${addInput.value.substring(0, 22)}...`;
+		//}
+		let newSlctr = {
+			todo: addInput.value,
+			checked: false,
+			importan: false,
+		};
 
-		let newSlctr = addInput.value;
-		if (newSlctr) {
-			if (newSlctr.length > 21) {
-				newSlctr = `${slctr.substring(0, 22)}...`;
-			}
-
-			const favorite = checkBox.checked;
-
-			if (favorite) {
-				eventDb.importan = true;
-			}
-
-			eventDb.slctr.push(newSlctr);
-			eventDb.slctr[newSlctr];
-			createEventList(eventDb.slctr, eventList);
+		if (checkBox.checked) {
+			newSlctr.importan = true;
 		}
+		eventDb.push(newSlctr);
+
+		displayMessage();
+
+		localStorage.setItem('todo', JSON.stringify(eventDb));
+		console.log(eventDb);
+
 		e.target.reset();
-		console.log(eventDb.slctr);
 	});
 
-	//function checkedOn() {
-	//	const favorite = checkBox.checked;
-	//	if (favorite) {
-	//		eventDb.slctr.style.backgroundColor = 'red';
-	//	}
-	//}
+	function displayMessage() {
+		let displayMessage = '';
+		//if (newSlctr.todo.lingth > 24) {addForm = }
+		if (eventDb.lingth === 0) todo.innerHTML = '';
+		eventDb.forEach(function (item, i) {
+			displayMessage += `
+			<li class="output__interactive-item">
+			<input class = "${
+				item.checked ? 'checkedYES' : ''
+			}" type = "checkbox" id='item_${i}' ${
+				item.checked ? 'checked' : ''
+			}  />
 
-	function createEventList(elem, parent) {
-		parent.innerHTML = '';
-		elem.forEach((evente, i) => {
-			parent.innerHTML += ` <li class="output__interactive-item"> ${
-				i + 1
-			} - ${evente} <div class="getNew"></div> <div class="delete"></div> </li> `;
+			<label 
+			for= 'item_${i}' 
+			class= " ${item.importan ? 'important' : ''} ${
+				item.checked ? 'checkedYES' : ''
+			}" >${item.todo}</label>
+
+			<div class="delete"></div> 
+			
+			</li>
+			`;
+			eventList.innerHTML = displayMessage;
+			deleteElement();
+			localStorage.setItem('todo', JSON.stringify(eventDb));
 		});
-		//Удаление на кнопку
+	}
+
+	function deleteElement() {
 		document.querySelectorAll('.delete').forEach((btn, i) => {
 			btn.addEventListener('click', () => {
 				btn.parentElement.remove();
-				eventDb.slctr.splice(i, 1);
-				createEventList(eventDb.slctr, eventList);
+				eventDb.splice(i, 1);
+				displayMessage();
+				console.log(eventDb);
 			});
 		});
 	}
 
-	//function nowDate() {
-	//	const date = new Date();
-	//	let hours = date.getHours();
-	//	let minutes = date.getMinutes();
-	//	let seconds = date.getSeconds();
+	eventList.addEventListener('change', function (event) {
+		let idInput = event.target.getAttribute('id');
+		let forLabel = eventList.querySelector('[for=' + idInput + ']');
+		let valueLabel = forLabel.innerHTML;
+		//console.log('forLabel: ', valueLabel);
 
-	//	if (hours < 10) hours = '0' + hours;
-	//	if (minutes < 10) minutes = `0${minutes}`;
-	//	if (seconds < 10) seconds = `0${seconds}`;
+		eventDb.forEach(function (item) {
+			if (item.todo === valueLabel) {
+				item.checked = !item.checked;
+				displayMessage();
+				localStorage.setItem('todo', JSON.stringify(eventDb));
+			}
+		});
+	});
 
-	//	let nowTime = hours + ':' + minutes + ':' + seconds;
-
-	//	return nowTime;
-	//}
-	//checkedOn();
-	createEventList(eventDb.slctr, eventList);
+	eventList.addEventListener('contextmenu', function (e) {
+		e.preventDefault();
+		eventDb.forEach(function (item) {
+			if (item.todo === e.target.innerHTML) {
+				item.importan = !item.importan;
+				displayMessage();
+				localStorage.setItem('todo', JSON.stringify(eventDb));
+			}
+		});
+	});
 });
